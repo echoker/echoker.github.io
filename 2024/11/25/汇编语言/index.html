@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		汇编语言 | 
+	 
+	Echoker
+	</title>
+	
+	<!-- keywords,description -->
+	
+	
+
+	<!-- favicon -->
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/9.17.1/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+	
+<script src="https://s4.zstatic.net/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+	
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/9.17.1/highlight.min.js"></script>
+
+	
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+	
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Echoker</a>
+
+	<ul id="menu">
+    
+
+    
+
+    
+
+    
+  
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="file">
+									<a href="/2024/11/24/hello-world/">
+                     
+										    hello-world
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2024/11/25/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                     
+										    汇编语言
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content" class="content">
+		<h1 id="article-title">
+	汇编语言
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>echoker</span>
+	<span>2024-11-25 01:53:37</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<h2 id="CPU、存储器与总线"><a href="#CPU、存储器与总线" class="headerlink" title="CPU、存储器与总线"></a>CPU、存储器与总线</h2><p>存储器划分为多个存储单元，一个存储单元为1Byte &#x3D; 8 bit</p>
+<p>CPU进行数据读写，需要与外部器件进行的信息交互，交互通过总线进行，可在逻辑上分为三类：</p>
+<ul>
+<li><p><strong>地址总线</strong>：存储单元的地址；即确认了是哪个器件（CPU将所有器件的存储器视为一个逻辑上的存储器，不同地址可以代表不同的器件），是器件存储器中的哪个地址</p>
+</li>
+<li><p><strong>控制总线</strong>：器件的选择，传输是读取命令还是写入命令</p>
+</li>
+<li><p><strong>数据总线</strong>：传输读取&#x2F;写入的数据</p>
+</li>
+</ul>
+<img title="" src="file:///C:/Users/Echoker/AppData/Roaming/marktext/images/2024-11-24-11-28-22-image.png" alt="" width="285">
+
+
+
+<p><img src="file:///C:/Users/Echoker/AppData/Roaming/marktext/images/2024-11-24-11-26-43-image.png" title="" alt="" width="272"><img title="" src="file:///C:/Users/Echoker/AppData/Roaming/marktext/images/2024-11-24-11-31-47-image.png" alt="" width="168"></p>
+<h2 id="地址总线与内存分段"><a href="#地址总线与内存分段" class="headerlink" title="地址总线与内存分段"></a>地址总线与内存分段</h2><p>地址总线用于传输存储单元的地址，地址总线能传输多少信息，决定了CPU的<strong>寻址能力</strong></p>
+<p>一根导线可以传输0或者1两种情况，<strong>有n根地址总线，就有 2^n bit 的寻址能力</strong></p>
+<p>8086CPU是16位架构，一次能够处理的地址位16位，但8086有20位地址总线，是因为采用了在内部用两个16位地址形成一个20位物理地址的方法：</p>
+<p>物理地址 &#x3D; 段地址 x 16 + 偏移地址</p>
+<p>段地址 和 偏移地址 都是16位，而段地址 x 16 后，在16进制中就进位了（末尾加个0），所以可以这样计算物理地址</p>
+<p>比如段地址为 1234H，偏移地址为 1234H，段地址向左移一位，相加得到物理地址为13574H</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 12340</span><br><span class="line">+ 1234</span><br><span class="line"> ______</span><br><span class="line"> 13574</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以使用分段的方式管理内存，将地址连续的内存单元视为一个段，用段地址x16定位段的起始地址（基础地址），用偏移地址定位段中的内存单元</p>
+<p>由于段地址x16必然是16的倍数，所以起始地址的结尾必然为0（16进制）</p>
+<p>偏移地址最大为FFFFH，即65536个内存单元，所以8086CPU一个段最长为65536 x 1 B &#x3D; 64KB</p>
+<p><img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-11-36-26-image.png"></p>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><h4 id="通用寄存器（AX、BX-、CX、DX）"><a href="#通用寄存器（AX、BX-、CX、DX）" class="headerlink" title="通用寄存器（AX、BX 、CX、DX）"></a>通用寄存器（AX、BX 、CX、DX）</h4><p>8086CPU的所有寄存器都是16位的，可以存放2字节</p>
+<p>通用寄存器存储一般性数据</p>
+<p>为兼容8位，又可以将其分为高位（H）和低位（L），如AX（16位）可以分为AH和AL两个独立8位寄存器使用，其他通用寄存器以此类推</p>
+<p><img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-08-13-image.png"></p>
+<p>比如AX中数据为1234H，即可以表示4660D&#x2F;1234H（AX）一个数值，也可以视为12H&#x2F;18D（AH）和34H&#x2F;52D（AL）两个数值</p>
+<p>8086CPU可一次性处理两种尺寸的数据：</p>
+<ul>
+<li><p>字节（byte），存储在8位寄存器</p>
+</li>
+<li><p>字（word），由2个字节组成，分为高位字节和地位字节，存储在16位寄存器</p>
+</li>
+</ul>
+<h4 id="代码段寄存器（CS）、指令指针寄存器（IP）"><a href="#代码段寄存器（CS）、指令指针寄存器（IP）" class="headerlink" title="代码段寄存器（CS）、指令指针寄存器（IP）"></a>代码段寄存器（CS）、指令指针寄存器（IP）</h4><p>内存中的数据，既可以当成普通数据，也可以当成指令</p>
+<p>8086CPU会将CS:IP指向的内容当作指令执行，CS存储段地址，IP存储偏移地址，</p>
+<p>CS:IP指向的物理地址：CS X 16 + IP</p>
+<h3 id="几条汇编指令（MOV、ADD、SUB）"><a href="#几条汇编指令（MOV、ADD、SUB）" class="headerlink" title="几条汇编指令（MOV、ADD、SUB）"></a>几条汇编指令（MOV、ADD、SUB）</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>用途</th>
+<th>高级语言表达</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MOV AX, 18</td>
+<td>18传入寄存器AX</td>
+<td>AX &#x3D; 18</td>
+</tr>
+<tr>
+<td>MOV AX, BX</td>
+<td>BX数据传入AX</td>
+<td>AX &#x3D; BX</td>
+</tr>
+<tr>
+<td>ADD AX, 8</td>
+<td>AX数据加上8</td>
+<td>AX &#x3D; AX + 8</td>
+</tr>
+<tr>
+<td>SUB AX, 8</td>
+<td>AX数据减去8</td>
+<td>AX &#x3D; AX - 8</td>
+</tr>
+</tbody></table>
+<p>若低位寄存器出现溢出，会丢弃左边的数据，不会进位到高位寄存器</p>
+<p><img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-29-16-image.png"></p>
+<h3 id="Debug使用"><a href="#Debug使用" class="headerlink" title="Debug使用"></a>Debug使用</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>查看寄存器和要执行的汇编指令<img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-34-13-image.png">编辑寄存器内容<img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-45-49-image.png"></td>
+</tr>
+<tr>
+<td>e</td>
+<td>编辑073F:0100处的内存。00为新值<img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-38-17-image.png"></td>
+</tr>
+<tr>
+<td>d</td>
+<td>查看内存<img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-40-31-image.png"></td>
+</tr>
+<tr>
+<td>a</td>
+<td>向内存写入汇编指令<img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-46-35-image.png"></td>
+</tr>
+<tr>
+<td>u</td>
+<td>将内存中的数据翻译为汇编指令<img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-46-57-image.png"></td>
+</tr>
+<tr>
+<td>t</td>
+<td>执行汇编指令<img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-47-40-image.png"></td>
+</tr>
+</tbody></table>
+<h2 id="寄存器（内存访问）"><a href="#寄存器（内存访问）" class="headerlink" title="寄存器（内存访问）"></a>寄存器（内存访问）</h2><h4 id="DS（段寄存器）和-address"><a href="#DS（段寄存器）和-address" class="headerlink" title="DS（段寄存器）和[address]"></a>DS（段寄存器）和[address]</h4><p>DS寄存器存放要访问的内存的段地址，[address]为偏移地址</p>
+<ul>
+<li>将1000:0送入AX：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MOV BX, 1000</span><br><span class="line">MOV DS, BX ;不能直接 MOV DS, 1000</span><br><span class="line">MOV AX, [0]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将AX送入1000:0：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV [0], AX</span><br></pre></td></tr></table></figure>
+
+<h4 id="内存中字的存储"><a href="#内存中字的存储" class="headerlink" title="内存中字的存储"></a>内存中字的存储</h4><p>一个内存单元为1字节，一个字为2字节，在内存中存储一个字，字的低位字节放在低地址值单元，高位字节放在高地址值单元。如：将1234H送入内存，由于12H位于寄存器中的高8位，所以需要存储在内存的高位（后面），所以1234在内存看起来是“倒着”的</p>
+<p><img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-12-58-08-image.png"></p>
+<table>
+<thead>
+<tr>
+<th>内存地址</th>
+<th>数值</th>
+<th>寄存器</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>073F:0000</td>
+<td>34</td>
+<td>AL</td>
+<td>34</td>
+</tr>
+<tr>
+<td>073F:0001</td>
+<td>12</td>
+<td>AH</td>
+<td>12</td>
+</tr>
+</tbody></table>
+<h2 id="栈机制（PUSH-POP指令，SS-SP寄存器）"><a href="#栈机制（PUSH-POP指令，SS-SP寄存器）" class="headerlink" title="栈机制（PUSH&amp;POP指令，SS&amp;SP寄存器）"></a>栈机制（PUSH&amp;POP指令，SS&amp;SP寄存器）</h2><blockquote>
+<p>栈是一种具有特殊的访问方式的存储空间。</p>
+<p>最后进入这个空间的数据，最先出去。</p>
+</blockquote>
+<p>SS存放栈顶段地址，SP存放偏移地址，SS:SP指向栈顶</p>
+<ul>
+<li><p>push ax：将ax送入栈中</p>
+</li>
+<li><p>pop ax：将栈顶数据送入ax</p>
+</li>
+</ul>
+<p>出入栈的单位都为<strong>字</strong>（16位）</p>
+<h4 id="PUSH入栈：执行后，SP-SP-2，将数据送入内存"><a href="#PUSH入栈：执行后，SP-SP-2，将数据送入内存" class="headerlink" title="PUSH入栈：执行后，SP&#x3D;SP-2，将数据送入内存"></a>PUSH入栈：执行后，SP&#x3D;SP-2，将数据送入内存</h4><p><img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-13-19-05-image.png"></p>
+<h4 id="栈空时，SS-SP指向栈最高地址的下一个单元"><a href="#栈空时，SS-SP指向栈最高地址的下一个单元" class="headerlink" title="栈空时，SS:SP指向栈最高地址的下一个单元"></a>栈空时，SS:SP指向栈最高地址的下一个单元</h4><p><img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-13-19-13-image.png"></p>
+<h4 id="POP出栈：执行后，SP-SP-2，数据从内存中送出，但数据依然存在，直到被覆盖"><a href="#POP出栈：执行后，SP-SP-2，数据从内存中送出，但数据依然存在，直到被覆盖" class="headerlink" title="POP出栈：执行后，SP&#x3D;SP+2，数据从内存中送出，但数据依然存在，直到被覆盖"></a>POP出栈：执行后，SP&#x3D;SP+2，数据从内存中送出，但数据依然存在，直到被覆盖</h4><p><img src="C:\Users\Echoker\AppData\Roaming\marktext\images\2024-11-24-13-19-21-image.png"></p>
+<h4 id="栈顶超界"><a href="#栈顶超界" class="headerlink" title="栈顶超界"></a>栈顶超界</h4><p>8086CPU只用SP:PP存储栈顶段地址和偏移地址，并不能限制栈顶上限和栈底，执行push，pop时CPU并不能保证栈不会超界。</p>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2024/11/24/hello-world/">
+                Hello World
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start">2023</span>-<span id="footerYear-end"></span>
+
+	
+	    <a href="/">echoker</a>. 由 <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a> 强力驱动
+	
+	
+	
+	<br>
+	<a href="https://beian.miit.gov.cn" target="_blank">闽ICP备2023019384号</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
