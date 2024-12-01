@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		汇编语言学习4-5 | 
+	 
+	Echoker
+	</title>
+	
+	<!-- keywords,description -->
+	
+	
+
+	<!-- favicon -->
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/9.17.1/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+	
+<script src="https://s4.zstatic.net/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+	
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css.js"></script>
+
+	
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-3-M/highlight.js/9.17.1/highlight.min.js"></script>
+
+	
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+	
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Echoker</a>
+
+	<ul id="menu">
+    
+
+    
+
+    
+
+    
+  
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="file">
+									<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
+                     
+										    汇编语言学习
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2024/12/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A04-5/">
+                     
+										    汇编语言学习4-5
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content" class="content">
+		<h1 id="article-title">
+	汇编语言学习4-5
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>echoker</span>
+	<span>2024-12-01 18:33:15</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<h2 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h2><h3 id="源程序与编译连接"><a href="#源程序与编译连接" class="headerlink" title="源程序与编译连接"></a>源程序与编译连接</h3><p>在DOS中可以通过edit编辑文本文件</p>
+<p>汇编语言包含<strong>汇编指令</strong>和<strong>伪指令</strong>，CPU只执行由汇编指令编译成的机器指令，编译器根据伪指令进行编译相关的工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg ;将有特定用途的段和相关的段寄存器关联</span><br><span class="line"></span><br><span class="line">codesg segment ; 程序由多个段组成。XXX为段名称（标号），XXX segment，与底部的 XXX ends成对出现</span><br><span class="line"></span><br><span class="line">	mov ax,0123h ;数值末尾带着h，代表十六进制，也可以不带，就是十进制</span><br><span class="line">	mov bx,0ffffh ;数值必须以数字开头，字母前需要加个0</span><br><span class="line">	add ax,[bx] ;源程序和debug不同，[]内不能直接用数值常量代表偏移地址</span><br><span class="line">	add ax,ds:[0ffffh] ;如果需要用常量，需要先指定段寄存器。如果按debug那样写(ax,[ffff])会编译器被识别为ax,ffffh</span><br><span class="line">	add dx,es:[0ffffh] ;可以用除DS外的段寄存器存放段地址，避免在需要使用多个段地址的情况下，不断重复设置DS</span><br><span class="line">	</span><br><span class="line">	mov ax,4c00h</span><br><span class="line">	int 21h ;程序末尾使用这两条指令实现程序返回</span><br><span class="line"></span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用<code>masm xxx.asm;</code>和<code>link xxx.obj;</code>，（结尾加分号）简化编译和连接</p>
+<h3 id="程序执行过程"><a href="#程序执行过程" class="headerlink" title="程序执行过程"></a>程序执行过程</h3><p>DOS的command将程序加载进内存，并将CPU的CS:IP指向程序的第一条指令，也就将CPU的控制权交给了程序，程序返回后，又将CPU控制权还给command</p>
+<p><img src="https://echoker.cn/static/image-20241201131018725.png" alt="image-20241201131018725"></p>
+<h2 id="BX-和loop"><a href="#BX-和loop" class="headerlink" title="[BX]和loop"></a>[BX]和loop</h2><p>bx存放一个偏移地址，就可以使用[bx]，效果等同于debug中的[偏移地址]，在上文源程序中已经展示过了。</p>
+<p>inc指令：inc bx，bx加一，类似于C语言的自增<code>i++</code></p>
+<h3 id="Debug中跟踪loop指令"><a href="#Debug中跟踪loop指令" class="headerlink" title="Debug中跟踪loop指令"></a>Debug中跟踪loop指令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">        mov ax,20h</span><br><span class="line">        mov ds,ax</span><br><span class="line"></span><br><span class="line">        mov cx,3fh ;cx存放循环次数</span><br><span class="line"></span><br><span class="line">        mov bx,0</span><br><span class="line"></span><br><span class="line">	  s:mov [bx],bx</span><br><span class="line">        add bx,1</span><br><span class="line">        </span><br><span class="line">        loop s</span><br><span class="line"></span><br><span class="line">        mov ax,4c00h</span><br><span class="line">        int 21h</span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p><code>debug xxx.exe</code>跟踪程序</p>
+<p>进入可以看到CS:IP指向程序第一条指令</p>
+<p><img src="https://echoker.cn/static/image-20241201132359033.png" alt="image-20241201132359033"></p>
+<p>使用<code>g 偏移地址</code>直接一次性执行到循环段，不必按多次t。在源程序中loop后面跟着标号，此处就是偏移地址了</p>
+<p><img src="https://echoker.cn/static/image-20241201133122569.png" alt="image-20241201133122569"></p>
+<p>按t执行，可以看到loop命令就是将IP不断重新指向原来的偏移地址，实现循环，CX也随着循环的执行，不断变小（CX&#x3D;CX-1），直到CX&#x3D;0时，跳出循环</p>
+<p><img src="https://echoker.cn/static/image-20241201183132745.png" alt="image-20241201183132745"></p>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
+                汇编语言学习
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start">2023</span>-<span id="footerYear-end"></span>
+
+	
+	    <a href="/">echoker</a>. 由 <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a> 强力驱动
+	
+	
+	
+	<br>
+	<a href="https://beian.miit.gov.cn" target="_blank">闽ICP备2023019384号</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
