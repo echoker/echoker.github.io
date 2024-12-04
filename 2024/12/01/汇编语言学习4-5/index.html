@@ -110,9 +110,9 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
+									<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A01-3/">
                      
-										    汇编语言学习
+										    汇编语言学习1-3
                      
 									</a>
 								</li>
@@ -185,7 +185,22 @@
 <div id="article-content">
 	<h2 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h2><h3 id="源程序与编译连接"><a href="#源程序与编译连接" class="headerlink" title="源程序与编译连接"></a>源程序与编译连接</h3><p>在DOS中可以通过edit编辑文本文件</p>
 <p>汇编语言包含<strong>汇编指令</strong>和<strong>伪指令</strong>，CPU只执行由汇编指令编译成的机器指令，编译器根据伪指令进行编译相关的工作。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg ;将有特定用途的段和相关的段寄存器关联</span><br><span class="line"></span><br><span class="line">codesg segment ; 程序由多个段组成。XXX为段名称（标号），XXX segment，与底部的 XXX ends成对出现</span><br><span class="line"></span><br><span class="line">	mov ax,0123h ;数值末尾带着h，代表十六进制，也可以不带，就是十进制</span><br><span class="line">	mov bx,0ffffh ;数值必须以数字开头，字母前需要加个0</span><br><span class="line">	add ax,[bx] ;源程序和debug不同，[]内不能直接用数值常量代表偏移地址</span><br><span class="line">	add ax,ds:[0ffffh] ;如果需要用常量，需要先指定段寄存器。如果按debug那样写(ax,[ffff])会编译器被识别为ax,ffffh</span><br><span class="line">	add dx,es:[0ffffh] ;可以用除DS外的段寄存器存放段地址，避免在需要使用多个段地址的情况下，不断重复设置DS</span><br><span class="line">	</span><br><span class="line">	mov ax,4c00h</span><br><span class="line">	int 21h ;程序末尾使用这两条指令实现程序返回</span><br><span class="line"></span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight assembly">assume cs:codesg ;将有特定用途的段和相关的段寄存器关联
+
+codesg segment ; 程序由多个段组成。XXX为段名称（标号），XXX segment，与底部的 XXX ends成对出现
+
+	mov ax,0123h ;数值末尾带着h，代表十六进制，也可以不带，就是十进制
+	mov bx,0ffffh ;数值必须以数字开头，字母前需要加个0
+	add ax,[bx] ;源程序和debug不同，[]内不能直接用数值常量代表偏移地址
+	add ax,ds:[0ffffh] ;如果需要用常量，需要先指定段寄存器。如果按debug那样写(ax,[ffff])会编译器被识别为ax,ffffh
+	add dx,es:[0ffffh] ;可以用除DS外的段寄存器存放段地址，避免在需要使用多个段地址的情况下，不断重复设置DS
+	
+	mov ax,4c00h
+	int 21h ;程序末尾使用这两条指令实现程序返回
+
+codesg ends
+
+end</code></pre>
 
 
 
@@ -194,7 +209,28 @@
 <p><img src="https://echoker.cn/static/image-20241201131018725.png" alt="image-20241201131018725"></p>
 <h2 id="BX-和loop"><a href="#BX-和loop" class="headerlink" title="[BX]和loop"></a>[BX]和loop</h2><p>bx存放一个偏移地址，就可以使用[bx]，效果等同于debug中的[偏移地址]，在上文源程序中已经展示过了。</p>
 <p>inc指令：inc bx，bx加一，类似于C语言的自增<code>i++</code></p>
-<h3 id="Debug中跟踪loop指令"><a href="#Debug中跟踪loop指令" class="headerlink" title="Debug中跟踪loop指令"></a>Debug中跟踪loop指令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">        mov ax,20h</span><br><span class="line">        mov ds,ax</span><br><span class="line"></span><br><span class="line">        mov cx,3fh ;cx存放循环次数</span><br><span class="line"></span><br><span class="line">        mov bx,0</span><br><span class="line"></span><br><span class="line">	  s:mov [bx],bx</span><br><span class="line">        add bx,1</span><br><span class="line">        </span><br><span class="line">        loop s</span><br><span class="line"></span><br><span class="line">        mov ax,4c00h</span><br><span class="line">        int 21h</span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h3 id="Debug中跟踪loop指令"><a href="#Debug中跟踪loop指令" class="headerlink" title="Debug中跟踪loop指令"></a>Debug中跟踪loop指令</h3><pre><code class="highlight assembly">assume cs:code
+
+code segment
+
+        mov ax,20h
+        mov ds,ax
+
+        mov cx,3fh ;cx存放循环次数
+
+        mov bx,0
+
+	  s:mov [bx],bx
+        add bx,1
+        
+        loop s
+
+        mov ax,4c00h
+        int 21h
+
+code ends
+
+end</code></pre>
 
 <p><code>debug xxx.exe</code>跟踪程序</p>
 <p>进入可以看到CS:IP指向程序第一条指令</p>
@@ -219,8 +255,8 @@
         </div>
         <div class="item right">
             
-              <a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
-                汇编语言学习
+              <a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A01-3/">
+                汇编语言学习1-3
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             

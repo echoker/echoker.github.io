@@ -108,9 +108,9 @@
 			
 							<ul>
 								<li class="file">
-									<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
+									<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A01-3/">
                      
-										    汇编语言学习
+										    汇编语言学习1-3
                      
 									</a>
 								</li>
@@ -154,7 +154,11 @@
 				</h2>
 				<div class="index-brief">
 					包含多个段的程序第六章内容比较少，基本都是实操，通过实验可以明白如何写、为什么要写多个段的汇编程序，以及段的一些特征。
-检测点6.1.112345678910111213141516171819202122assume cs:codesgcodesg segment		dw 0123h,0456h,
+检测点6.1.1assume cs:codesg
+
+codesg segment
+	
+	dw 0123h,0456h,0789h,0abch,0defh,0fedh,0cbah,0
 					...
 				</div>
 			</a>
@@ -182,7 +186,9 @@
 				<div class="index-brief">
 					第一个程序源程序与编译连接在DOS中可以通过edit编辑文本文件
 汇编语言包含汇编指令和伪指令，CPU只执行由汇编指令编译成的机器指令，编译器根据伪指令进行编译相关的工作。
-12345678910111213141516assume cs:codesg ;将有特定用途的段和相关的段寄存器关联code
+assume cs:codesg ;将有特定用途的段和相关的段寄存器关联
+
+codesg segment ; 程序由多个段组成
 					...
 				</div>
 			</a>
@@ -203,9 +209,9 @@
 		</div>	
 	
 		<div class="index-li">
-			<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
+			<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A01-3/">
 				<h2 class="index-title">
-					汇编语言学习
+					汇编语言学习1-3
 				</h2>
 				<div class="index-brief">
 					CPU、存储器与总线存储器划分为多个存储单元，一个存储单元为1Byte &#x3D; 8 bit

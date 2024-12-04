@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		汇编语言学习 | 
+		汇编语言学习1-3 | 
 	 
 	Echoker
 	</title>
@@ -110,9 +110,9 @@
 			
 							<ul>
 								<li class="file active">
-									<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
+									<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A01-3/">
                      
-										    汇编语言学习
+										    汇编语言学习1-3
                      
 									</a>
 								</li>
@@ -148,7 +148,7 @@
 	<!-- 引入正文 -->
 	<div id="content" class="content">
 		<h1 id="article-title">
-	汇编语言学习
+	汇编语言学习1-3
 </h1>
 
 <!-- meta -->
@@ -193,20 +193,21 @@
 <li><p><strong>数据总线</strong>：传输读取&#x2F;写入的数据</p>
 </li>
 </ul>
-<img title="" src="file:///C:/Users/Echoker/AppData/Roaming/marktext/images/2024-11-24-11-28-22-image.png" alt="" width="285">
+<img src="https://echoker.cn/static/2024-11-24-11-28-22-image.png" style="zoom: 33%;" />
 
 
 
-<p><img src="file:///C:/Users/Echoker/AppData/Roaming/marktext/images/2024-11-24-11-26-43-image.png" title="" alt="" width="272"><img title="" src="file:///C:/Users/Echoker/AppData/Roaming/marktext/images/2024-11-24-11-31-47-image.png" alt="" width="168"></p>
+<p><img src="https://echoker.cn/static/2024-11-24-11-26-43-image.png" style="zoom: 25%;" /><img src="https://echoker.cn/static/2024-11-24-11-31-47-image.png" style="zoom: 50%;" /></p>
 <h2 id="地址总线与内存分段"><a href="#地址总线与内存分段" class="headerlink" title="地址总线与内存分段"></a>地址总线与内存分段</h2><p>地址总线用于传输存储单元的地址，地址总线能传输多少信息，决定了CPU的<strong>寻址能力</strong></p>
 <p>一根导线可以传输0或者1两种情况，<strong>有n根地址总线，就有 2^n bit 的寻址能力</strong></p>
 <p>8086CPU是16位架构，一次能够处理的地址位16位，但8086有20位地址总线，是因为采用了在内部用两个16位地址形成一个20位物理地址的方法：</p>
 <p>物理地址 &#x3D; 段地址 x 16 + 偏移地址</p>
 <p>段地址 和 偏移地址 都是16位，而段地址 x 16 后，在16进制中就进位了（末尾加个0），所以可以这样计算物理地址</p>
 <p>比如段地址为 1234H，偏移地址为 1234H，段地址向左移一位，相加得到物理地址为13574H</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 12340</span><br><span class="line">+ 1234</span><br><span class="line"> ______</span><br><span class="line"> 13574</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="highlight markdown"> 12340
+<span class="bullet">+</span> 1234
+ <span class="strong">____</span>__
+ 13574</code></pre>
 
 <p>可以使用分段的方式管理内存，将地址连续的内存单元视为一个段，用段地址x16定位段的起始地址（基础地址），用偏移地址定位段中的内存单元</p>
 <p>由于段地址x16必然是16的倍数，所以起始地址的结尾必然为0（16进制）</p>
@@ -294,12 +295,14 @@
 <ul>
 <li>将1000:0送入AX：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MOV BX, 1000</span><br><span class="line">MOV DS, BX ;不能直接 MOV DS, 1000</span><br><span class="line">MOV AX, [0]</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight assembly">MOV BX, 1000
+MOV DS, BX ;不能直接 MOV DS, 1000
+MOV AX, [0]</code></pre>
 
 <ul>
 <li>将AX送入1000:0：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV [0], AX</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight assembly">MOV [0], AX</code></pre>
 
 <h4 id="内存中字的存储"><a href="#内存中字的存储" class="headerlink" title="内存中字的存储"></a>内存中字的存储</h4><p>一个内存单元为1字节，一个字为2字节，在内存中存储一个字，字的低位字节放在低地址值单元，高位字节放在高地址值单元。如：将1234H送入内存，由于12H位于寄存器中的高8位，所以需要存储在内存的高位（后面），所以1234在内存看起来是“倒着”的</p>
 <p><img src="https://echoker.cn/static/2024-11-24-12-58-08-image.png"></p>
