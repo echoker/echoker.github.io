@@ -2,7 +2,7 @@ $(document).ready(function () {
   hljs.initHighlightingOnLoad();
   clickTreeDirectory();
   serachTree();
-  pjaxLoad();
+  // pjaxLoad();
   showArticleIndex();
   switchTreeOrIndex();
   scrollToTop();
@@ -215,6 +215,19 @@ function serachTree() {
           "a:contains('" + inputContent + "')");
       if (searchResult.length) {
         showActiveTree(searchResult.parent(), false)
+      }
+    }
+  });
+
+  $("#search-input").on("keyup", function (e) {
+    e.preventDefault();
+    if (event.keyCode == 13) {
+      var inputContent = e.currentTarget.value;
+
+      if (inputContent.length === 0) {
+      } else {
+        window.open(searchEngine + inputContent + "%20site:" + homeHost,
+            "_blank");
       }
     }
   });
