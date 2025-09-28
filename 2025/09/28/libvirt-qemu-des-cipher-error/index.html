@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		libvirt QEMU DES加密算法不支持错误解决方案 | 
+	 
+	Echoker
+	</title>
+	
+	<!-- keywords,description -->
+	
+	
+
+	<!-- favicon -->
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/9.17.1/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+	
+<script src="https://s4.zstatic.net/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+	
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/9.17.1/highlight.min.js"></script>
+
+	
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+	
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Echoker</a>
+
+	<ul id="menu">
+    
+      <li class="menu-item">
+        <a href="/about" class="menu-item-link">关于</a>
+      </li>
+    
+
+    
+      <li class="menu-item">
+        <a href="/tags" class="menu-item-link">标签</a>
+      </li>
+    
+
+    
+      <li class="menu-item">
+        <a href="/categories" class="menu-item-link">分类</a>
+      </li>
+    
+
+    
+  
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="标题搜索">
+		<div id="tree">
+			
+
+			
+				<ul>
+				<li class="file">
+					<a href="/2024/11/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A01-3/">
+                     
+						    汇编语言学习1-3
+                     
+					</a>
+				</li>
+				<div class="article-toc" style="display: none;"></div>
+			</ul>
+		
+			<ul>
+				<li class="file">
+					<a href="/2024/12/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A04-5/">
+                     
+						    汇编语言学习4-5
+                     
+					</a>
+				</li>
+				<div class="article-toc" style="display: none;"></div>
+			</ul>
+		
+			<ul>
+				<li class="file">
+					<a href="/2024/12/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A06-9/">
+                     
+						    汇编语言学习6-9
+                     
+					</a>
+				</li>
+				<div class="article-toc" style="display: none;"></div>
+			</ul>
+		
+			<ul>
+				<li class="file">
+					<a href="/2025/09/28/libvirt-qemu-des-cipher-error/">
+                     
+						    libvirt QEMU DES加密算法不支持错误解决方案
+                     
+					</a>
+				</li>
+				<div class="article-toc" style="display: none;"></div>
+			</ul>
+		
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content" class="content">
+		<h1 id="article-title">
+	libvirt QEMU DES加密算法不支持错误解决方案
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>echoker</span>
+	<span>2025-09-28 19:01:31</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+          
+              <span>
+                  <i class="fa fa-folder" aria-hidden="true">
+                  <a href="/categories/虚拟化/">虚拟化</a>
+                  </i>
+                
+              </span>
+          
+      
+    
+
+    
+		    <span>Tags：</span>
+        <span>
+            <i class="fa fa-tag" aria-hidden="true">
+            <a href="/tags/libvirt/">libvirt</a>
+            </i>
+            
+            <i class="fa fa-tag" aria-hidden="true">
+            <a href="/tags/QEMU/">QEMU</a>
+            </i>
+            
+            <i class="fa fa-tag" aria-hidden="true">
+            <a href="/tags/VNC/">VNC</a>
+            </i>
+            
+        </span>
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在使用libvirt启动QEMU虚拟机时，遇到了以下错误：</p>
+<pre><code class="highlight bash">libvirt: QEMU Driver error : internal error: qemu unexpectedly closed the monitor: 2025-09-28T19:01:31.026930Z qemu-system-x86_64: -vnc 0.0.0.0:4101,password=on,audiodev=audio1: Cipher backend does not support DES algorithm</code></pre>
+
+<p>这个错误表明QEMU在启动时因为VNC配置中的DES加密算法不被当前系统的加密后端支持而失败。</p>
+
+<h2 id="错误原因分析"><a href="#错误原因分析" class="headerlink" title="错误原因分析"></a>错误原因分析</h2><p>该错误的根本原因是：</p>
+<ul>
+<li><strong>DES算法过时</strong>：DES (Data Encryption Standard) 是一种较老的加密算法，由于安全性较低，现代系统逐渐停止支持</li>
+<li><strong>系统加密库更新</strong>：新版本的OpenSSL或其他加密库可能已经移除了对DES的支持</li>
+<li><strong>VNC配置问题</strong>：libvirt配置中VNC连接使用了DES加密，但系统不支持</li>
+</ul>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一：修改VNC配置移除密码认证"><a href="#方案一：修改VNC配置移除密码认证" class="headerlink" title="方案一：修改VNC配置移除密码认证"></a>方案一：修改VNC配置移除密码认证</h3><p>最直接的解决方案是修改虚拟机的XML配置，移除VNC的密码认证：</p>
+<pre><code class="highlight xml">&lt;!-- 原配置 --&gt;
+&lt;graphics type=&#x27;vnc&#x27; port=&#x27;-1&#x27; autoport=&#x27;yes&#x27; passwd=&#x27;your_password&#x27;/&gt;
+
+&lt;!-- 修改后的配置 --&gt;
+&lt;graphics type=&#x27;vnc&#x27; port=&#x27;-1&#x27; autoport=&#x27;yes&#x27;/&gt;</code></pre>
+
+<p>使用virsh命令修改：</p>
+<pre><code class="highlight bash"># 编辑虚拟机配置
+virsh edit your_vm_name
+
+# 或者使用命令行直接修改
+virsh dumpxml your_vm_name &gt; vm_config.xml
+# 编辑xml文件移除passwd属性
+virsh define vm_config.xml</code></pre>
+
+<h3 id="方案二：使用更安全的认证方式"><a href="#方案二：使用更安全的认证方式" class="headerlink" title="方案二：使用更安全的认证方式"></a>方案二：使用更安全的认证方式</h3><p>配置SASL认证替代传统的VNC密码：</p>
+<pre><code class="highlight xml">&lt;graphics type=&#x27;vnc&#x27; port=&#x27;-1&#x27; autoport=&#x27;yes&#x27;&gt;
+  &lt;listen type=&#x27;address&#x27; address=&#x27;0.0.0.0&#x27;/&gt;
+&lt;/graphics&gt;</code></pre>
+
+<p>然后在<code>/etc/libvirt/qemu.conf</code>中配置SASL：</p>
+<pre><code class="highlight bash"># 启用SASL认证
+vnc_sasl = 1
+vnc_sasl_dir = &quot;/etc/sasl2&quot;</code></pre>
+
+<h3 id="方案三：使用SPICE替代VNC"><a href="#方案三：使用SPICE替代VNC" class="headerlink" title="方案三：使用SPICE替代VNC"></a>方案三：使用SPICE替代VNC</h3><p>SPICE协议提供更好的性能和安全性：</p>
+<pre><code class="highlight xml">&lt;graphics type=&#x27;spice&#x27; port=&#x27;-1&#x27; autoport=&#x27;yes&#x27;&gt;
+  &lt;listen type=&#x27;address&#x27; address=&#x27;0.0.0.0&#x27;/&gt;
+  &lt;image compression=&#x27;off&#x27;/&gt;
+&lt;/graphics&gt;</code></pre>
+
+<h3 id="方案四：系统级修复-仅适用于兼容性需求"><a href="#方案四：系统级修复-仅适用于兼容性需求" class="headerlink" title="方案四：系统级修复（仅适用于兼容性需求）"></a>方案四：系统级修复（仅适用于兼容性需求）</h3><p>如果必须使用DES，可以考虑以下选项（不推荐，仅用于旧系统兼容）：</p>
+<pre><code class="highlight bash"># Ubuntu/Debian系统
+sudo apt-get install libssl1.1
+
+# CentOS/RHEL系统
+# 可能需要编译支持DES的OpenSSL版本
+
+# 检查当前OpenSSL支持的加密算法
+openssl list -cipher-algorithms | grep -i des</code></pre>
+
+<h2 id="预防措施"><a href="#预防措施" class="headerlink" title="预防措施"></a>预防措施</h2><ul>
+<li><strong>定期更新配置</strong>：随着系统更新，及时检查并更新虚拟机配置</li>
+<li><strong>使用现代认证</strong>：避免使用过时的加密算法，采用更安全的认证方式</li>
+<li><strong>测试环境验证</strong>：在生产环境部署前，先在测试环境验证配置</li>
+<li><strong>监控日志</strong>：定期检查libvirt和QEMU日志，及早发现潜在问题</li>
+</ul>
+
+<h2 id="命令行操作示例"><a href="#命令行操作示例" class="headerlink" title="命令行操作示例"></a>命令行操作示例</h2><pre><code class="highlight bash"># 查看虚拟机列表
+virsh list --all
+
+# 查看虚拟机当前配置
+virsh dumpxml vm_name
+
+# 编辑虚拟机配置
+virsh edit vm_name
+
+# 重启libvirt服务（修改配置后）
+sudo systemctl restart libvirtd
+
+# 启动虚拟机
+virsh start vm_name
+
+# 查看虚拟机VNC端口
+virsh vncdisplay vm_name</code></pre>
+
+<h2 id="验证解决方案"><a href="#验证解决方案" class="headerlink" title="验证解决方案"></a>验证解决方案</h2><p>修改配置后，可以通过以下方式验证：</p>
+<pre><code class="highlight bash"># 检查虚拟机是否正常启动
+virsh list
+
+# 查看libvirt日志
+sudo journalctl -u libvirtd -f
+
+# 测试VNC连接
+vncviewer localhost:display_number</code></pre>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>DES加密算法不支持的错误主要是由于系统安全性升级导致的。推荐的解决方案是移除VNC密码认证或使用更安全的认证方式，而不是降级系统加密库。这样既能解决当前问题，又能保持系统的安全性。</p>
+
+<p>对于生产环境，建议采用SPICE协议或配置适当的网络安全措施（如VPN、防火墙规则）来保护虚拟机的远程访问。</p>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2024/12/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A06-9/">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                汇编语言学习6-9
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start">2023</span>-<span id="footerYear-end"></span>
+
+	
+	    <a href="/">echoker</a>. 由 <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a> 强力驱动
+	
+	
+	
+	<br>
+	<a href="https://beian.miit.gov.cn" target="_blank">闽ICP备2023019384号</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
